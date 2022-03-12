@@ -3,20 +3,14 @@ import Link from "next/link"
 
 import Error from 'next/error'
 
-function Download(){
+function Download({link}){
     return(
         <>
             <div className="modal">
                 <div className="w-100 h-100 text-center" >
-                    <div className="modal-content m-auto h-100 w-100">
-                        {/* <div className="modal-header">
-                            <h5 className="modal-title">Modal title</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> */}
+                    <div className="modal-content m-auto h-75 w-100">
 
-                        <iframe className='h-100 w-100' frameBorder="no" border="0" src='https://gogoplay4.com/download?id=MTgyMzQ3#content-download' sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
+                        <iframe className='h-100 w-100' frameBorder="no" border="0" src={link} sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
 
                     <div className="modal-footer">
                       <button type="button" className="btn btn-primary">Refresh</button>
@@ -104,11 +98,11 @@ export default function Main({eps}) {
              d.error? 
                  setEps(<Error statusCode={404} />) 
              :
-                 setEps(<Episodes title = {d?.title} referer={d.referer} eplist={d.epList} num={d.epnum} />)
+                 setEps(<Episodes title = {d?.title} referer={d.referer} eplist={d.epList} num={d.epnum} />;<Download link={d.referer} />)
                  endpreloader(true)
          })
     }, [eps])
 
-    return(<>{Eps} <Download/></>)
+    return(<>{Eps}</>)
 
 }
