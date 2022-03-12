@@ -75,6 +75,7 @@ function Episodes(props){
                 </div>
             </div>
         </section>
+        <Download link={props.referer} />
     </>
     )
 }
@@ -98,7 +99,7 @@ export default function Main({eps}) {
              d.error? 
                  setEps(<Error statusCode={404} />) 
              :
-                 setEps(<Episodes title = {d?.title} referer={d.referer} eplist={d.epList} num={d.epnum} />;<Download link={d.referer} />)
+                 setEps(<Episodes title = {d?.title} referer={d.referer} eplist={d.epList} num={d.epnum} />)
                  endpreloader(true)
          })
     }, [eps])
