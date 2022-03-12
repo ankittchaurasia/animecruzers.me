@@ -10,7 +10,7 @@ function Download({link}){
                 <div className="w-100 h-100 text-center" >
                     <div className="modal-content m-auto h-75 w-100">
 
-                        <iframe className='h-100 w-100' frameBorder="no" border="0" src={link} sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
+                        <iframe className='h-100 w-100' frameBorder="no" border="0" src={link.replacd("loading.php","download")} sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
 
                     <div className="modal-footer">
                       <button type="button" className="btn btn-primary">Refresh</button>
