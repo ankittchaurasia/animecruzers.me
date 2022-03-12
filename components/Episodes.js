@@ -16,7 +16,7 @@ function Download(){
                             </button>
                         </div> */}
 
-                        <iframe className='h-100 w-100' FRAMEBORDER="no" BORDER="0" src='https://gogoplay4.com/download?id=MTgyMzQ3#content-download' sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
+                        <iframe className='h-100 w-100' frameBorder="no" border="0" src='https://gogoplay4.com/download?id=MTgyMzQ3#content-download' sandbox='allow-scripts allow-same-origin allow-downloads'></iframe>
 
                     <div className="modal-footer">
                       <button type="button" className="btn btn-primary">Refresh</button>
@@ -62,7 +62,7 @@ function Episodes(props){
                                 <div id="get-frame" style={{height: 'inherit'}}>
                                     <iframe src={player} id="iframeplayer" width='100%' height='100%' />
                                 </div>
-                                <div class="eptop">
+                                <div className="eptop">
                                     <button className="btn btn-sm btn-secondary" onClick={(e)=>document.querySelector(".modal").style.display = 'block'}> Download </button>
                                 </div>
                             </div>
