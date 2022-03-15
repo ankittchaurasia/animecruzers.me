@@ -70,15 +70,16 @@ const Genres = [
 
 
 export const scrapeMP4 = async({ id }) => {
-    var m3u8Url = '';
+    // var m3u8Url = '';
     try {
         const epPage = await axios.get(BASE_URL + "/" + id);
         const $ = cheerio.load(epPage.data)
 
         const title = $('div.title_name h2').text();
 
-        const server = $('li.vidcdn > a').attr('data-video')
+        // const server = $('li.vidcdn > a').attr('data-video')
         const server2 = $('li.anime > a').attr('data-video')
+        const server3 = $('li.streamsb > a').attr('data-video')
 
         // Eplist
         const epList = []
@@ -109,9 +110,11 @@ export const scrapeMP4 = async({ id }) => {
         return {
             title,
             // m3u8: m3u8Url,
-            referer: "https:" + server2,
+            // embed: server,
+            gogo: "https:" + server2,
+            streamsb: server3,
             epnum: id.split('-episode-')[1],
-            epList: epList
+            epList,
 
         }
 
