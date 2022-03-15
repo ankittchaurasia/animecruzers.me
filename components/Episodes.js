@@ -52,7 +52,7 @@ function Episodes(props){
         }
         
     },[props.epnum])
-
+    
     return(
         <>
             <section className="anime-details spad">
