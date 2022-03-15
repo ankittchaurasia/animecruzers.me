@@ -110,7 +110,6 @@ export const scrapeMP4 = async({ id }) => {
         return {
             title,
             // m3u8: m3u8Url,
-            // embed: server,
             gogo: "https:" + server2,
             streamsb: server3,
             epnum: id.split('-episode-')[1],
