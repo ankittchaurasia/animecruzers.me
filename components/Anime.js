@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import Link from "next/link"
+import Header from "./Header"
 
 import Error from 'next/error'
 
@@ -85,7 +86,12 @@ export default function Details({anime}){
                 d.error? 
                     setDetails(<Error statusCode={404} />) 
                 :
-                    setDetails(<Anime {...d} />)
+                    setDetails(
+                    <>
+                    <Header title={d.animeTitle} desc={d.synopsis} img={d.animeImg}  />
+                    <Anime {...d} />
+                    </>
+                    )
                     endpreloader(true)
             })
     }, [anime])

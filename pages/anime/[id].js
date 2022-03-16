@@ -1,4 +1,4 @@
-import Header from "../../components/Header"
+// import Header from "../../components/Header"
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
 import Anime from "../../components/Anime"
@@ -11,7 +11,7 @@ export default function AnimeDetails() {
 
   return (
     <>
-    <Header />
+    {/* <Header /> */}
     <Navbar />
     <Anime anime={id} />
     <Footer />

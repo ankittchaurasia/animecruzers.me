@@ -1,4 +1,4 @@
-import Header from "../../components/Header"
+// import Header from "../../components/Header"
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
 import Episodes from "../../components/Episodes"
@@ -11,7 +11,7 @@ export default function Main() {
 
   return (
     <>
-    <Header />
+    {/* <Header /> */}
     <Navbar />
     <Episodes eps={id} />
     <Footer />

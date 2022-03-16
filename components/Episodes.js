@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import Link from "next/link"
+import Header from "./Header"
 
 import Error from 'next/error'
 
@@ -119,7 +120,12 @@ export default function Main({eps}) {
              d.error? 
                  setEps(<Error statusCode={404} />) 
              :
-                 setEps(<Episodes {...d} />)
+                 setEps(
+                 <>
+                 <Header title={`Watching ${d.title}`} desc={d.title} />
+                 <Episodes {...d} />
+                 </>
+                 )
                  endpreloader(true)
          })
     }, [eps])
