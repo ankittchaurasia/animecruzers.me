@@ -73,7 +73,7 @@ export default function Blocks({id, name}){
                             </Link>
 
                             <div className="product__item__text">
-                                <h5><Link href={`/anime/${d.animeId}`}><a>{d.episodeNum?d.animeTitle+' Episode '+d.episodeNum:d.animeTitle}</a></Link></h5>
+                                <h5><Link href={d.animeId?`/anime/${d.animeId}`:d.episodeId?`/episodes/${d.episodeId}`:'/'}><a>{d.episodeNum?d.animeTitle+' Episode '+d.episodeNum:d.animeTitle}</a></Link></h5>
                             </div>
                         </div>
                     </div>

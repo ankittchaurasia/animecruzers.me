@@ -32,11 +32,11 @@ function Episodes(props){
         const server2 = document.querySelector('.server2')
 
         if(server === 1){
-            setPlayer({embed: props.streamsb, download: props.streamsb.replace("/e/","/d/")+'.html'})
+            setPlayer({embed: props.streamsb, download: props.streamsb?.replace("/e/","/d/")+'.html'})
             server1.setAttribute('disabled','')
             server2.removeAttribute('disabled')
         }else{
-            setPlayer({embed:props.gogo, download: props.gogo.replace("streaming.php","download")})
+            setPlayer({embed:props.gogo, download: props.gogo?.replace("streaming.php","download")})
             server1.removeAttribute('disabled')
             server2.setAttribute('disabled','')
         }   
@@ -74,7 +74,7 @@ function Episodes(props){
                                 </div>
                                 
                                 <div id="get-frame" style={{height: 'inherit'}}>
-                                    <iframe onLoad={()=>load? load.style.display = 'none': ''} src={player?.embed} id="iframeplayer" width='100%' height='100%' />
+                                    <iframe onLoad={()=>load? load.style.display = 'none': ''} src={player?.embed} id="iframeplayer" width='100%' height='100%' allowFullScreen />
                                 </div>
                                 <div className="eptop">
                                     <button className="btn btn-sm btn-secondary" onClick={(e)=>document.querySelector(".modal").style.display = 'block'}> Download </button>
@@ -84,7 +84,7 @@ function Episodes(props){
                             <div className="list_container">
                             <div className="section-title mb-5">
                                 <button className="btn btn-secondary server1" onClick={()=>changelink(1)}>Server V1</button>
-                                <button className="btn btn-secondary server2" onClick={changelink}>Server V2</button>
+                                <button className="ml-2 btn btn-secondary server2" onClick={changelink}>Server V2</button>
                             </div>
                             <div className="anime__details__episodes">
                             {props?.epList?.length? props?.epList?.map((d,i)=>
