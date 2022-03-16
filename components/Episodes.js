@@ -27,7 +27,7 @@ function Episodes(props){
     const load = document.querySelector("#loading_show")
 
     const changelink = (server) =>{
-        load?.style?.display = 'block'
+        load? load.style.display = 'block' : ''
         const server1 = document.querySelector('.server1')
         const server2 = document.querySelector('.server2')
 
@@ -74,7 +74,7 @@ function Episodes(props){
                                 </div>
                                 
                                 <div id="get-frame" style={{height: 'inherit'}}>
-                                    <iframe onLoad={()=>load.style.display = 'none'} src={player?.embed} id="iframeplayer" width='100%' height='100%' />
+                                    <iframe onLoad={()=>load? load.style.display = 'none': ''} src={player?.embed} id="iframeplayer" width='100%' height='100%' />
                                 </div>
                                 <div className="eptop">
                                     <button className="btn btn-sm btn-secondary" onClick={(e)=>document.querySelector(".modal").style.display = 'block'}> Download </button>
@@ -113,7 +113,6 @@ export default function Main({eps}) {
     
     useEffect(() => {
         endpreloader(false)
-
          fetch('/api/watch?id='+eps)
          .then(res => res.json())
          .then(d => {
