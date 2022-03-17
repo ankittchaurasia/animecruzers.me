@@ -2,6 +2,11 @@ import { scrapeMP4 } from "../../parser.js"
 
 export default async(req, res) => {
     try {
+        if(!(req.headers.host === 'localhost:3000' || req.headers.host === 'animecruzers.me') ) {
+            res.statusCode = 403;
+            res.end('Forbidden');
+            return false;
+        }
         const id = req.query.id
 
         const data = await scrapeMP4({ id: id })

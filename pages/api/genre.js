@@ -1,6 +1,11 @@
 import { scrapeGenre } from "../../parser.js"
 export default async(req, res) => {
     try {
+        if(!(req.headers.host === 'localhost:3000' || req.headers.host === 'animecruzers.me') ) {
+            res.statusCode = 403;
+            res.end('Forbidden');
+            return false;
+        }
         const genre = req.query.genre
         const page = req.query.page
 
