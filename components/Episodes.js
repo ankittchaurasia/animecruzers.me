@@ -33,10 +33,12 @@ function Episodes(props){
         const server2 = document.querySelector('.server2')
 
         if(server === 1){
+            localStorage.setItem('server', 1)
             setPlayer({embed: props.streamsb, download: props.streamsb?.replace("/e/","/d/")+'.html'})
             server1.setAttribute('disabled','')
             server2.removeAttribute('disabled')
         }else{
+            localStorage.setItem('server', 2)
             setPlayer({embed:props.gogo, download: props.gogo?.replace("streaming.php","download")})
             server1.removeAttribute('disabled')
             server2.setAttribute('disabled','')
@@ -44,7 +46,8 @@ function Episodes(props){
     }
 
     useEffect(()=>{
-        if(props.streamsb){
+        const savedserver = localStorage.getItem('server');
+        if(props.streamsb && savedserver === '1'){
             changelink(1)
         }else if(props.gogo){
             changelink()
