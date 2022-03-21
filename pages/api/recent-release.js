@@ -1,8 +1,9 @@
-import {scrapeRecentRelease} from '../../parser.js'
-
+import {scrapeRecentRelease} from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
     try {
         
+        auth(req)
         const page = req.query.page
         const type = req.query.type
 

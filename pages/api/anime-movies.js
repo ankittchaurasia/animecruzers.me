@@ -1,8 +1,8 @@
-import {scrapeAnimeMovies} from '../../parser.js'
-
+import {scrapeAnimeMovies} from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
     try {
-        
+        auth(req)
         const page = req.query.page
         const alphabet = req.query.aph
 

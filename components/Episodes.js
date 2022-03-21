@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import Link from "next/link"
 import Header from "./Header"
-
 import Error from 'next/error'
 
 function Download({link}){
@@ -25,37 +24,71 @@ function Download({link}){
 function Episodes(props){
 
     const [player, setPlayer] = useState({embed:'', download:''})
+
+    const [def, setdef] = useState('')
+
     const load = document.querySelector("#loading_show")
+
+    const linkobj = {
+        default: {
+                  embed: def,
+                  download: props.gogo?.replace("streaming.php","download")
+        },
+        streamsb: {
+                 embed: props.streamsb,
+                 download: props.streamsb?.replace("/e/","/d/")+'.html'
+        },
+        gogo: {
+                embed: props.gogo,
+                download: props.gogo?.replace("streaming.php","download")
+        }
+    }
+
+    const enablebtn = (classname) =>{
+        const e = document.querySelector(classname);
+        document.querySelectorAll(".server").forEach(elem=>{
+            elem === e? elem.setAttribute("disabled",''): elem.removeAttribute("disabled")
+        })
+    }
 
     const changelink = (server) =>{
         load? load.style.display = 'block' : ''
-        const server1 = document.querySelector('.server1')
-        const server2 = document.querySelector('.server2')
 
-        if(server === 1){
-            localStorage.setItem('server', 1)
-            setPlayer({embed: props.streamsb, download: props.streamsb?.replace("/e/","/d/")+'.html'})
-            server1.setAttribute('disabled','')
-            server2.removeAttribute('disabled')
+        if(server === 0){
+            setPlayer({...linkobj.default})
+            enablebtn(".default")
+        }else if(server === 1){
+            // localStorage.setItem('server', 1)
+            setPlayer({...linkobj.streamsb})
+            enablebtn(".s1")
         }else{
-            localStorage.setItem('server', 2)
-            setPlayer({embed:props.gogo, download: props.gogo?.replace("streaming.php","download")})
-            server1.removeAttribute('disabled')
-            server2.setAttribute('disabled','')
+            // localStorage.setItem('server', 2)
+            setPlayer({...linkobj.gogo})
+            enablebtn(".s2")
         }   
     }
 
     useEffect(()=>{
-        const savedserver = localStorage.getItem('server');
-        if(props.streamsb && savedserver === '1'){
-            changelink(1)
-        }else if(props.gogo){
-            changelink()
-        }else{
-            setEps(<Error statusCode={404} />) 
-        }
+        // const savedserver = localStorage.getItem('server');
+       
+        fetch('/api/default?id='+props.id)
+        .then(res=>res.json())
+        .then(res=>setdef(res.location))
+        .catch(()=>{
+            if(props.default){
+                changelink(1)
+            }else if(props.gogo){
+                changelink(2)
+            }else{
+                setEps(<Error statusCode={404} />) 
+            }
+        })
         
     },[props.epnum])
+
+    useEffect(()=>{
+        changelink(0);
+    },[def])
     
     return(
         <>
@@ -78,7 +111,7 @@ function Episodes(props){
                                 </div>
                                 
                                 <div id="get-frame" style={{height: 'inherit'}}>
-                                    <iframe onLoad={()=>load? load.style.display = 'none': ''} src={player?.embed} id="iframeplayer" width='100%' height='100%' allowFullScreen />
+                                    <iframe onLoad={()=>load? load.style.display = 'none': ''} onError={()=>changelink(1)} src={player?.embed} id="iframeplayer" width='100%' height='100%' allowFullScreen />
                                 </div>
                                 <div className="eptop">
                                     <button className="btn btn-sm btn-secondary" onClick={(e)=>document.querySelector(".modal").style.display = 'block'}> Download </button>
@@ -87,8 +120,9 @@ function Episodes(props){
                             
                             <div className="list_container">
                             <div className="section-title mb-5">
-                                <button className="btn btn-secondary server1" onClick={()=>changelink(1)}>Server V1</button>
-                                <button className="ml-2 btn btn-secondary server2" onClick={changelink}>Server V2</button>
+                                <button className="btn btn-secondary server default" onClick={()=>changelink(0)}>Default</button>
+                                <button className="ml-2 btn btn-secondary server s1" onClick={()=>changelink(1)}>Server V1</button>
+                                <button className="ml-2 btn btn-secondary server s2" onClick={changelink}>Server V2</button>
                             </div>
                             <div className="anime__details__episodes">
                             {props?.epList?.length? props?.epList?.map((d,i)=>

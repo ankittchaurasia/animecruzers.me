@@ -1,5 +1,6 @@
 import axios from 'axios'
 import cheerio from 'cheerio'
+// import request from 'request'
 
 
 const BASE_URL = "https://gogoanime.fi/" || "https://gogoanime.gg/"
@@ -70,7 +71,6 @@ const Genres = [
 
 
 export const scrapeMP4 = async({ id }) => {
-    // var m3u8Url = '';
     try {
         const epPage = await axios.get(BASE_URL + "/" + id);
         const $ = cheerio.load(epPage.data)
@@ -80,7 +80,7 @@ export const scrapeMP4 = async({ id }) => {
         // const server = $('li.vidcdn > a').attr('data-video')
         const server2 = $('li.anime > a').attr('data-video')
         const server3 = $('li.streamsb > a').attr('data-video')
-
+      
         // Eplist
         const epList = []
         const ep_start = $("#episode_page > li").first().find('a').text().split('-')[0]
@@ -99,6 +99,22 @@ export const scrapeMP4 = async({ id }) => {
             })
         })
 
+        // Def
+        // const gogoid = server2.split('?id=')[1].split('&')[0]
+
+        // const animixapi = "/api/live"+Buffer.from(gogoid+ "LTXs3GrU8we9O" + Buffer.from(gogoid).toString('base64')).toString('base64')
+        // var https = require('https');
+
+        // const options = {
+        //     hostname: 'animixplay.to',
+        //     path: animixapi,
+        //     headers: { 'User-Agent': 'Mozilla/5.0' }
+        // }
+        // async function server(){
+        //   return https.get(options, (response)=>res.json({location: response.headers.location.includes('https://')? response.headers.location : 'https://plyr.link/p/'+response.headers.location}));
+        // }
+
+
         // const goGoServerPage = await axios.get("https:" + server)
         // const $$ = cheerio.load(goGoServerPage.data)
 
@@ -107,10 +123,11 @@ export const scrapeMP4 = async({ id }) => {
         // if (matcher.includes("m3u8") || matcher.includes("googlevideo")) {
         //     m3u8Url = matcher
         // }
+
         return {
             title,
-            // m3u8: m3u8Url,
             gogo: "https:" + server2,
+            id: server2.split('?id=')[1].split('&')[0],
             streamsb: server3,
             epnum: id.split('-episode-')[1],
             epList,

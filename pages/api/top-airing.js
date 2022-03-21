@@ -1,8 +1,9 @@
-import {scrapeTopAiringAnime} from '../../parser.js';
-
+import {scrapeTopAiringAnime} from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
     try {
         
+        auth(req)
         const page = req.query.page
 
         const data = await scrapeTopAiringAnime({ page: page })

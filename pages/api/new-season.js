@@ -1,8 +1,8 @@
-import {scrapeNewSeason} from '../../parser.js'
-
+import {scrapeNewSeason} from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
-    try {
-        
+    try{
+        auth(req)
         const page = req.query.page
 
         const data = await scrapeNewSeason({ page: page })

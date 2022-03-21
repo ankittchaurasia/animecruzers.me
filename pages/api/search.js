@@ -1,8 +1,9 @@
-import {scrapeSearch} from '../../parser.js'
+import {scrapeSearch} from "../../bone/parser"
+import auth from "../../bone/auth"
 
 export default async function handler(req, res){
     try {
-        
+        auth(req)
         const keyw = req.query.keyw
         const page = req.query.page
 

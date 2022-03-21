@@ -1,7 +1,8 @@
-import { scrapeGenre } from "../../parser.js"
+import { scrapeGenre } from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
     try {
-        
+        auth(req)
         const genre = req.query.genre
         const page = req.query.page
 

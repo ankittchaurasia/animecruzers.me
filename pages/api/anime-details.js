@@ -1,8 +1,8 @@
-import { scrapeAnimeDetails} from "../../parser.js";
-
+import { scrapeAnimeDetails} from "../../bone/parser"
+import auth from "../../bone/auth"
 export default async(req, res) => {
     try {
-        
+        auth(req)
         const id = req.query.id
 
         const data = await scrapeAnimeDetails({ id: id })
