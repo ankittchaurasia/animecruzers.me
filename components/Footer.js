@@ -14,7 +14,8 @@ export default function Footer() {
                         </div> */}
                     </div>
                     <div className="col-lg-6">
-                        <div className="footer__nav"></div>
+                        <div className="footer__nav anime__details__text">
+                        </div>
                     </div>
 
                     <div className="col-lg-3">

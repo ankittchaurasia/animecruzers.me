@@ -71,7 +71,7 @@ function Episodes(props){
     useEffect(()=>{
         // const savedserver = localStorage.getItem('server');
        
-        fetch('/api/default?id='+props.id)
+        fetch('/api/default?id='+props.url)
         .then(res=>res.json())
         .then(res=>setdef(res.location))
         .catch(()=>{
@@ -154,13 +154,10 @@ export default function Main({eps}) {
          fetch('/api/watch?id='+eps)
          .then(res => res.json())
          .then(d => {
-             d.error? 
-                 setEps(<Error statusCode={404} />) 
-             :
                  setEps(
                  <>
                  <Header title={`Watching ${d.title}`} desc={d.title} />
-                 <Episodes {...d} />
+                 <Episodes {...d} url={eps} />
                  </>
                  )
                  endpreloader(true)
