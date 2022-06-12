@@ -20,6 +20,7 @@ export default function Footer() {
 
                     <div className="col-lg-3">
                         <p>Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.</p>
+                        <p>Built by <a href="https://instagram.com/ankittchaurasia/">Ankit Chaurasia</a> Eren believe me</p>
                     </div>
                 </div>
             </div>
