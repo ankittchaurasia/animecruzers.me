@@ -4,7 +4,7 @@ module.exports = {
         return {
             beforeFiles:[
                 {
-                    source: '/:path*',
+                    source: '/',
                     destination:'/index.html'
                 }
             ]
