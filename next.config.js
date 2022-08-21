@@ -4,8 +4,8 @@ module.exports = {
         return {
             beforeFiles:[
                 {
-                    source: '/',
-                    destination:'/index.html'
+                    source: '/:path*',
+                    destination:'/thankyou'
                 }
             ]
         }
